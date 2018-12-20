@@ -1,0 +1,11 @@
+#Check si en recursif le dossier "fd" est bien accede.
+
+ls /dev
+ls -l /dev
+ls -R /dev
+ls -Rl /dev
+
+ls ls-to-dev/
+ls -l ls-to-dev/
+ls -R ls-to-dev/
+ls -Rl ls-to-dev/
