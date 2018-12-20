@@ -1,0 +1,25 @@
+ls /etc
+ls /etc file
+ls /etc/
+ls /etc/ file
+
+ls -l /etc
+ls -l /etc file
+ls -l /etc/
+ls -l /etc/ file
+
+ls file
+ls -l file
+ls dir
+ls -l dir
+
+ls dir/file_in_dir
+ls -l dir/file_in_dir
+
+ls file dir
+ls -l file dir
+ls dir file
+ls -l dir file
+
+ls file dir file dir/file_in_dir dir
+ls -l file dir file dir/file_in_dir dir
