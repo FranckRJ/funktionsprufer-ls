@@ -1,0 +1,28 @@
+ls test-link-to-nothing
+ls -l test-link-to-nothing
+ls test-link-to-nothing/
+ls -l test-link-to-nothing/
+
+ls
+ls -R
+ls -l
+ls -lR
+
+ls dir-for-cycle
+ls -R dir-for-cycle
+ls -l dir-for-cycle
+ls -lR dir-for-cycle
+
+ls dir-for-cycle/another-dir-for-cycle
+ls -R dir-for-cycle/another-dir-for-cycle
+ls -l dir-for-cycle/another-dir-for-cycle
+ls -lR dir-for-cycle/another-dir-for-cycle
+
+ls dir-for-cycle/cyclic-link
+ls -R dir-for-cycle/cyclic-link
+ls dir-for-cycle/cyclic-link/
+ls -R dir-for-cycle/cyclic-link/
+ls -l dir-for-cycle/cyclic-link
+ls -lR dir-for-cycle/cyclic-link
+ls -l dir-for-cycle/cyclic-link/
+ls -lR dir-for-cycle/cyclic-link/
