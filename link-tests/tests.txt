@@ -1,3 +1,19 @@
+ls /var
+ls /var zfile
+ls /var/
+ls /var/ zfile
+
+ls -l /var
+ls -l /var zfile
+ls -l /var/
+ls -l /var/ zfile
+
+ls zfile /var
+ls zfile /var/
+
+ls -l zfile /var
+ls -l zfile /var/
+
 ls test-link-to-nothing
 ls -l test-link-to-nothing
 ls test-link-to-nothing/

@@ -1,13 +1,3 @@
-ls /var
-ls /var file
-ls /var/
-ls /var/ file
-
-ls -l /var
-ls -l /var file
-ls -l /var/
-ls -l /var/ file
-
 ls file
 ls -l file
 ls dir
