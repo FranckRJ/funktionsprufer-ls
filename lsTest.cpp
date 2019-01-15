@@ -9,6 +9,7 @@
 #include "lsTest.hpp"
 #include "funktionsprufer/openFile.hpp"
 #include "funktionsprufer/cppStrVal.hpp"
+#include "funktionsprufer/noPaddingCppStrVal.hpp"
 #include "funktionsprufer/stdOutputGetter.hpp"
 
 namespace
@@ -81,15 +82,15 @@ lsTest::lsTest()
 			kill(childPid, SIGKILL);
 			if (select_ret == 0)
 			{
-				return mkSpCppStrVal("TIMEOUT (> 5s)");
+				return mkSpNoPaddingCppStrVal("TIMEOUT (> 5s)");
 			}
 			else if (sig_chld_catched)
 			{
-				return mkSpCppStrVal("Stdout :\n" + openFile::getTmpfileContent());
+				return mkSpNoPaddingCppStrVal("Stdout :\n" + openFile::getTmpfileContent());
 			}
 			else
 			{
-				return mkSpCppStrVal("ERROR");
+				return mkSpNoPaddingCppStrVal("ERROR");
 			}
 		};
 	testFunction =
@@ -125,15 +126,15 @@ lsTest::lsTest()
 			kill(childPid, SIGKILL);
 			if (select_ret == 0)
 			{
-				return mkSpCppStrVal("TIMEOUT (> 5s)");
+				return mkSpNoPaddingCppStrVal("TIMEOUT (> 5s)");
 			}
 			else if (sig_chld_catched)
 			{
-				return mkSpCppStrVal("Stdout :\n" + openFile::getTmpfileContent());
+				return mkSpNoPaddingCppStrVal("Stdout :\n" + openFile::getTmpfileContent());
 			}
 			else
 			{
-				return mkSpCppStrVal("ERROR");
+				return mkSpNoPaddingCppStrVal("ERROR");
 			}
 		};
 }

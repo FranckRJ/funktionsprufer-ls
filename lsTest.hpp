@@ -3,14 +3,15 @@
 
 #include "funktionsprufer/absTest.hpp"
 #include "funktionsprufer/cppStrVal.hpp"
+#include "funktionsprufer/noPaddingCppStrVal.hpp"
 
 class lsTest : public absTest
 {
 public:
 	lsTest();
 protected:
-	std::function<spCppStrVal(spCppStrVal, spCppStrVal)> baseFunction;
-	std::function<spCppStrVal(spCppStrVal, spCppStrVal)> testFunction;
+	std::function<spNoPaddingCppStrVal(spCppStrVal, spCppStrVal)> baseFunction;
+	std::function<spNoPaddingCppStrVal(spCppStrVal, spCppStrVal)> testFunction;
 };
 
 #endif
