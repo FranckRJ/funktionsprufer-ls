@@ -18,15 +18,15 @@ int lsBasicArgsTest::launchTest()
 
 void lsBasicArgsTest::processTest()
 {
-	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("/etc"));
-	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("/etc file"));
-	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("/etc/"));
-	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("/etc/ file"));
+	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("/var"));
+	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("/var file"));
+	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("/var/"));
+	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("/var/ file"));
 
-	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("-l /etc"));
-	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("-l /etc file"));
-	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("-l /etc/"));
-	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("-l /etc/ file"));
+	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("-l /var"));
+	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("-l /var file"));
+	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("-l /var/"));
+	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("-l /var/ file"));
 
 	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("file"));
 	testThisFun(baseFunction, testFunction, mkSpCppStrVal("basic-args-tests"), mkSpCppStrVal("-l file"));

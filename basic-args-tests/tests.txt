@@ -1,12 +1,12 @@
-ls /etc
-ls /etc file
-ls /etc/
-ls /etc/ file
+ls /var
+ls /var file
+ls /var/
+ls /var/ file
 
-ls -l /etc
-ls -l /etc file
-ls -l /etc/
-ls -l /etc/ file
+ls -l /var
+ls -l /var file
+ls -l /var/
+ls -l /var/ file
 
 ls file
 ls -l file
