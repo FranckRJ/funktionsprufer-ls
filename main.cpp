@@ -2,6 +2,7 @@
 
 #include "funktionsprufer/testLauncher.hpp"
 #include "lsBasicArgsTest.hpp"
+#include "lsUgidTest.hpp"
 
 static std::string HELP_INFOS =
 R"str(DESCRIPTION:
@@ -25,6 +26,7 @@ int main(int argc, char **argv)
 	launcher.setHelpInf(HELP_INFOS);
 
 	launcher.addTest("basic-args", std::bind(lsBasicArgsTest::launchTest));
+	launcher.addTest("ugid", std::bind(lsUgidTest::launchTest));
 
 	launcher.addOption("-r", std::bind(testLauncher::defRemoveFun, std::placeholders::_1, std::placeholders::_2));
 	launcher.addOption("--erronly", std::bind(testLauncher::defErrOnlyFun, std::placeholders::_1, std::placeholders::_2));
