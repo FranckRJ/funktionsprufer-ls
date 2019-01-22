@@ -3,3 +3,5 @@ ft_ls
 test-ls
 tmpfile.txt
 maic.c
+basic-args-tests/
+ugid-tests/
