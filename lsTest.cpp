@@ -46,7 +46,6 @@ namespace
 
 	spNoPaddingCppStrVal exec_ls(spCppStrVal baseDir, spCppStrVal args, bool isBinLs)
 	{
-		chdir(baseDir->getVal().c_str());
 		struct timeval timeout = {5,0};
 		int select_ret = 0;
 		pid_t childPid = 0;
@@ -56,6 +55,7 @@ namespace
 
 		if ((childPid = fork()) == 0)
 		{
+			chdir(baseDir->getVal().c_str());
 			std::vector<std::string> argsTab = split_string(args->getVal(), ' ');
 			char *programName = strdup(isBinLs ? "ls" : "ft_ls");
 			char *argv[2 + argsTab.size()];
@@ -91,7 +91,7 @@ namespace
 			}
 			else
 			{
-				return mkSpNoPaddingCppStrVal("Stdout :\n" + openFile::getThisFileContent("../" + openFile::tmpfileName));
+				return mkSpNoPaddingCppStrVal("Stdout :\n" + openFile::getTmpfileContent());
 			}
 		}
 		else
