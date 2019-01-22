@@ -2,6 +2,7 @@ ft_ls
 *.o
 test-ls
 tmpfile.txt
-maic.c
+change_date.c
 basic-args-tests/
 ugid-tests/
+link-tests/
