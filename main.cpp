@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unistd.h>
 
 #include "funktionsprufer/testLauncher.hpp"
 #include "lsBasicArgsTest.hpp"
@@ -17,6 +18,18 @@ LISTE DES COMMANDES:
 --nocolor                 Desactive l'affichage avec des couleurs.
 --help                    Affiche cette page d'aide.)str";
 
+void untar_tests_files()
+{
+	pid_t childPid = 0;
+
+	if ((childPid = fork()) == 0)
+	{
+		execl("./untar_tests_files.sh", "./untar_tests_files.sh", NULL);
+		exit(0);
+	}
+	waitpid(childPid, NULL, 0);
+}
+
 int main(int argc, char **argv)
 {
 	testLauncher launcher;
@@ -33,6 +46,8 @@ int main(int argc, char **argv)
 	launcher.addOption("--nocolor", std::bind(testLauncher::defNoColorFun, std::placeholders::_1, std::placeholders::_2));
 	launcher.addOption("--help", std::bind(testLauncher::defHelpFun, std::placeholders::_1, std::placeholders::_2));
 	launcher.setNoOptArgFun(std::bind(testLauncher::defNoOptArgFun, std::placeholders::_1, std::placeholders::_2));
+
+	untar_tests_files();
 
 	launcher.processArgs(argc, argv);
 
