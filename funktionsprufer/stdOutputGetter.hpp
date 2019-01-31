@@ -4,10 +4,12 @@
 class stdOutputGetter
 {
 public:
-  stdOutputGetter(std::string filebufName);
-  ~stdOutputGetter();
+	stdOutputGetter(std::string filebufName, bool closeStdErr = false);
+	~stdOutputGetter();
 private:
-    int oldId = 0;
+	int oldId = 0;
+	int oldErrId = 0;
+	bool stdErrIsClosed = false;
 };
 
 #endif

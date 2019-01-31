@@ -65,7 +65,7 @@ namespace
 				argv[1 + i] = strdup(argsTab[i].c_str());
 			}
 			argv[1 + argsTab.size()] = nullptr;
-			stdOutputGetter tmp("../" + openFile::tmpfileName);
+			stdOutputGetter tmp("../" + openFile::tmpfileName, true);
 			execv(isBinLs ? "/bin/ls" : "../ft_ls/ft_ls", argv);
 			programName[0] = argv[1 + argsTab.size()][1]; //pour forcer un crash
 			exit(1); //securite au cas ou ca crash pas
