@@ -4,7 +4,7 @@
 
 namespace
 {
-	void removeDevMinor(std::string& str)
+	void removeDevMinorAndFdContent(std::string& str)
 	{
 		std::string::size_type offset = 0;
 
@@ -14,6 +14,11 @@ namespace
 			while (str[endOffset] == ' ' || (str[endOffset] >= '0' && str[endOffset] <= '9'))
 				++endOffset;
 			str.erase(offset, endOffset - offset);
+		}
+		offset = str.find("/fd:");
+		if (offset != std::string::npos)
+		{
+			str.erase(offset + 5);
 		}
 	}
 }
@@ -38,25 +43,24 @@ void lsDevTest::processTest()
 		[&](spCppStrVal baseDir, spCppStrVal args)
 		{
 			std::string tmpVal = exec_ls(baseDir, args, true)->getVal();
-			removeDevMinor(tmpVal);
+			removeDevMinorAndFdContent(tmpVal);
 			return mkSpNoPaddingCppStrVal(tmpVal);
 		};
 	std::function<spNoPaddingCppStrVal(spCppStrVal, spCppStrVal)> testDevFunction =
 		[&](spCppStrVal baseDir, spCppStrVal args)
 		{
 			std::string tmpVal = exec_ls(baseDir, args, false)->getVal();
-			removeDevMinor(tmpVal);
+			removeDevMinorAndFdContent(tmpVal);
 			return mkSpNoPaddingCppStrVal(tmpVal);
 		};
 
-	//supprimer les differences normales (contenu dossier fd et mineur de certains devices).
-	testThisFun(baseFunction, testFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("/dev"));
+	testThisFun(baseDevFunction, testDevFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("/dev"));
 	testThisFun(baseDevFunction, testDevFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("-l /dev"));
-	//testThisFun(baseFunction, testFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("-R /dev"));
-	//testThisFun(baseFunction, testFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("-Rl /dev"));
+	testThisFun(baseDevFunction, testDevFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("-R /dev"));
+	testThisFun(baseDevFunction, testDevFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("-Rl /dev"));
 
-	testThisFun(baseFunction, testFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("ls-to-dev/"));
+	testThisFun(baseDevFunction, testDevFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("ls-to-dev/"));
 	testThisFun(baseDevFunction, testDevFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("-l ls-to-dev/"));
-	//testThisFun(baseFunction, testFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("-R ls-to-dev/"));
-	//testThisFun(baseFunction, testFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("-Rl ls-to-dev/"));
+	testThisFun(baseDevFunction, testDevFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("-R ls-to-dev/"));
+	testThisFun(baseDevFunction, testDevFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("-Rl ls-to-dev/"));
 }
