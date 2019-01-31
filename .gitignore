@@ -6,3 +6,5 @@ change_date.c
 basic-args-tests/
 ugid-tests/
 link-tests/
+time-tests/
+.*.swp
