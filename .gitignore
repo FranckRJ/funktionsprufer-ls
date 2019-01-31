@@ -7,4 +7,5 @@ basic-args-tests/
 ugid-tests/
 link-tests/
 time-tests/
+time-sort-tests/
 .*.swp

@@ -8,3 +8,5 @@ rm -rf link-tests
 tar -xf link-tests-files.tar
 rm -rf time-tests
 tar -xf time-tests-files.tar
+rm -rf time-sort-tests
+tar -xf time-sort-tests-files.tar
