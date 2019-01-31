@@ -44,60 +44,61 @@ namespace
 		return (listOfSubStr);
 	}
 
-	spNoPaddingCppStrVal exec_ls(spCppStrVal baseDir, spCppStrVal args, bool isBinLs)
+}
+
+spNoPaddingCppStrVal lsTest::exec_ls(spCppStrVal baseDir, spCppStrVal args, bool isBinLs)
+{
+	struct timeval timeout = {5,0};
+	int select_ret = 0;
+	pid_t childPid = 0;
+
+	signal(SIGCHLD, sig_chld_handler);
+	sig_chld_catched = false;
+
+	if ((childPid = fork()) == 0)
 	{
-		struct timeval timeout = {5,0};
-		int select_ret = 0;
-		pid_t childPid = 0;
-
-		signal(SIGCHLD, sig_chld_handler);
-		sig_chld_catched = false;
-
-		if ((childPid = fork()) == 0)
+		chdir(baseDir->getVal().c_str());
+		std::vector<std::string> argsTab = split_string(args->getVal(), ' ');
+		char *programName = strdup(isBinLs ? "ls" : "ft_ls");
+		char *argv[2 + argsTab.size()];
+		argv[0] = programName;
+		for (size_t i = 0; i < argsTab.size(); ++i)
 		{
-			chdir(baseDir->getVal().c_str());
-			std::vector<std::string> argsTab = split_string(args->getVal(), ' ');
-			char *programName = strdup(isBinLs ? "ls" : "ft_ls");
-			char *argv[2 + argsTab.size()];
-			argv[0] = programName;
-			for (size_t i = 0; i < argsTab.size(); ++i)
-			{
-				argv[1 + i] = strdup(argsTab[i].c_str());
-			}
-			argv[1 + argsTab.size()] = nullptr;
-			stdOutputGetter tmp("../" + openFile::tmpfileName, true);
-			execv(isBinLs ? "/bin/ls" : "../ft_ls/ft_ls", argv);
-			programName[0] = argv[1 + argsTab.size()][1]; //pour forcer un crash
-			exit(1); //securite au cas ou ca crash pas
+			argv[1 + i] = strdup(argsTab[i].c_str());
 		}
+		argv[1 + argsTab.size()] = nullptr;
+		stdOutputGetter tmp("../" + openFile::tmpfileName, true);
+		execv(isBinLs ? "/bin/ls" : "../ft_ls/ft_ls", argv);
+		programName[0] = argv[1 + argsTab.size()][1]; //pour forcer un crash
+		exit(1); //securite au cas ou ca crash pas
+	}
 
-		select_ret = select(0, NULL, NULL, NULL, &timeout);
-		signal(SIGCHLD, SIG_DFL);
+	select_ret = select(0, NULL, NULL, NULL, &timeout);
+	signal(SIGCHLD, SIG_DFL);
 
-		kill(childPid, SIGKILL);
-		if (select_ret == 0)
+	kill(childPid, SIGKILL);
+	if (select_ret == 0)
+	{
+		return mkSpNoPaddingCppStrVal("TIMEOUT (> 5s)");
+	}
+	else if (sig_chld_catched)
+	{
+		int childStatus;
+
+		waitpid(childPid, &childStatus, 0);
+
+		if (WIFSIGNALED(childStatus))
 		{
-			return mkSpNoPaddingCppStrVal("TIMEOUT (> 5s)");
-		}
-		else if (sig_chld_catched)
-		{
-			int childStatus;
-
-			waitpid(childPid, &childStatus, 0);
-
-			if (WIFSIGNALED(childStatus))
-			{
-				return mkSpNoPaddingCppStrVal("ERROR (crash ?)");
-			}
-			else
-			{
-				return mkSpNoPaddingCppStrVal("Stdout :\n" + openFile::getTmpfileContent());
-			}
+			return mkSpNoPaddingCppStrVal("ERROR (crash ?)");
 		}
 		else
 		{
-			return mkSpNoPaddingCppStrVal("UNKNOWN ERROR");
+			return mkSpNoPaddingCppStrVal("Stdout :\n" + openFile::getTmpfileContent());
 		}
+	}
+	else
+	{
+		return mkSpNoPaddingCppStrVal("UNKNOWN ERROR");
 	}
 }
 

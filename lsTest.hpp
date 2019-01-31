@@ -10,6 +10,8 @@ class lsTest : public absTest
 public:
 	lsTest();
 protected:
+	spNoPaddingCppStrVal exec_ls(spCppStrVal baseDir, spCppStrVal args, bool isBinLs);
+protected:
 	std::function<spNoPaddingCppStrVal(spCppStrVal, spCppStrVal)> baseFunction;
 	std::function<spNoPaddingCppStrVal(spCppStrVal, spCppStrVal)> testFunction;
 };
