@@ -8,4 +8,5 @@ ugid-tests/
 link-tests/
 time-tests/
 time-sort-tests/
+dev-tests/
 .*.swp

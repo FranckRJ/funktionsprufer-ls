@@ -7,6 +7,7 @@
 #include "lsLinkTest.hpp"
 #include "lsTimeTest.hpp"
 #include "lsTimeSortTest.hpp"
+#include "lsDevTest.hpp"
 
 static std::string HELP_INFOS =
 R"str(DESCRIPTION:
@@ -46,6 +47,7 @@ int main(int argc, char **argv)
 	launcher.addTest("link", std::bind(lsLinkTest::launchTest));
 	launcher.addTest("time", std::bind(lsTimeTest::launchTest));
 	launcher.addTest("time-sort", std::bind(lsTimeSortTest::launchTest));
+	launcher.addTest("dev", std::bind(lsDevTest::launchTest));
 
 	launcher.addOption("-r", std::bind(testLauncher::defRemoveFun, std::placeholders::_1, std::placeholders::_2));
 	launcher.addOption("--erronly", std::bind(testLauncher::defErrOnlyFun, std::placeholders::_1, std::placeholders::_2));
