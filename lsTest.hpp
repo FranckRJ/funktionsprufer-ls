@@ -3,7 +3,7 @@
 
 #include "funktionsprufer/absTest.hpp"
 #include "funktionsprufer/cppStrVal.hpp"
-#include "funktionsprufer/noPaddingCppStrVal.hpp"
+#include "noPaddingCppStrVal.hpp"
 
 class lsTest : public absTest
 {

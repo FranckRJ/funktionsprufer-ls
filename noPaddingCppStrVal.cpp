@@ -5,9 +5,9 @@
 
 #include "noPaddingCppStrVal.hpp"
 
-noPaddingCppStrVal::noPaddingCppStrVal(std::string newVal, std::string newName) : cppStrVal(newVal, newName)
+noPaddingCppStrVal::noPaddingCppStrVal(std::string newVal, std::string newName, bool newOnlyDiffAfterCmp) : cppStrVal(newVal, newName)
 {
-	//rien
+	onlyDiffAfterCmp = newOnlyDiffAfterCmp;
 }
 
 bool noPaddingCppStrVal::equalsSameType(spAbsVal<std::string> cmpVal)

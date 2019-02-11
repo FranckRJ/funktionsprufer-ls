@@ -4,8 +4,8 @@
 #include <string>
 #include <memory>
 
-#include "absVal.hpp"
-#include "cppStrVal.hpp"
+#include "funktionsprufer/absVal.hpp"
+#include "funktionsprufer/cppStrVal.hpp"
 
 class noPaddingCppStrVal;
 
@@ -20,8 +20,10 @@ spNoPaddingCppStrVal mkSpNoPaddingCppStrVal(Args... args)
 class noPaddingCppStrVal : public cppStrVal
 {
 public:
-	noPaddingCppStrVal(std::string newVal = "", std::string newName = "");
+	noPaddingCppStrVal(std::string newVal = "", std::string newName = "", bool newOnlyDiffAfterCmp = true);
 	bool equalsSameType(spAbsVal<std::string> cmpVal);
+private:
+	bool onlyDiffAfterCmp;
 };
 
 #endif

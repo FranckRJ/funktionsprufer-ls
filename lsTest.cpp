@@ -9,7 +9,7 @@
 #include "lsTest.hpp"
 #include "funktionsprufer/openFile.hpp"
 #include "funktionsprufer/cppStrVal.hpp"
-#include "funktionsprufer/noPaddingCppStrVal.hpp"
+#include "noPaddingCppStrVal.hpp"
 #include "funktionsprufer/stdOutputGetter.hpp"
 
 namespace
@@ -77,29 +77,32 @@ spNoPaddingCppStrVal lsTest::exec_ls(spCppStrVal baseDir, spCppStrVal args, bool
 	signal(SIGCHLD, SIG_DFL);
 
 	kill(childPid, SIGKILL);
-	if (select_ret == 0)
-	{
-		return mkSpNoPaddingCppStrVal("TIMEOUT (> 5s)");
-	}
-	else if (sig_chld_catched)
-	{
-		int childStatus;
+	return mkSpNoPaddingCppStrVal([&]() -> std::string
+			{
+				if (select_ret == 0)
+				{
+					return "TIMEOUT (> 5s)";
+				}
+				else if (sig_chld_catched)
+				{
+					int childStatus;
 
-		waitpid(childPid, &childStatus, 0);
+					waitpid(childPid, &childStatus, 0);
 
-		if (WIFSIGNALED(childStatus))
-		{
-			return mkSpNoPaddingCppStrVal("ERROR (crash ?)");
-		}
-		else
-		{
-			return mkSpNoPaddingCppStrVal("Stdout :\n" + openFile::getTmpfileContent());
-		}
-	}
-	else
-	{
-		return mkSpNoPaddingCppStrVal("UNKNOWN ERROR");
-	}
+					if (WIFSIGNALED(childStatus))
+					{
+						return "ERROR (crash ?)";
+					}
+					else
+					{
+						return ("Stdout :\n" + openFile::getTmpfileContent());
+					}
+				}
+				else
+				{
+					return "UNKNOWN ERROR";
+				}
+			}(), "", true);
 }
 
 lsTest::lsTest()
