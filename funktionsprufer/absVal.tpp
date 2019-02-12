@@ -40,6 +40,12 @@ T absVal<T>::getVal()
 }
 
 template <class T>
+T& absVal<T>::getValRef()
+{
+	return val;
+}
+
+template <class T>
 std::string absVal<T>::getName()
 {
 	return name;

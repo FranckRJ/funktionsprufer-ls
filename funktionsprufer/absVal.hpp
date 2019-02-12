@@ -29,6 +29,8 @@ public:
 	void setIsCrashVal(bool newVal);
 	std::string valToStringOrCrash();
 	virtual std::string valToString() = 0;
+protected:
+	virtual T& getValRef();
 private:
 	T val;
 	std::string name;
