@@ -77,15 +77,22 @@ bool noPaddingCppStrVal::equalsSameType(spAbsVal<std::string> cmpVal)
 					++str2CurPos;
 				}
 			} while (str1CurPos != str1.end() && str2CurPos != str2.end());
+			moveIterators(str1LineStart, str1CurPos, str1);
+			moveIterators(str2LineStart, str2CurPos, str2);
 			if (str1CurPos != str1.end() || str2CurPos != str2.end())
 			{
+				appendToStr(newStr1, (str1CurPos == str1.end() ? "Chaine terminee.\n" : "Chaine non terminee.\n"),
+						nbOfDiffs, std::count(str1.begin(), str1LineStart, '\n'));
+				appendToStr(newStr2, (str2CurPos == str2.end() ? "Chaine terminee.\n" : "Chaine non terminee.\n"),
+						nbOfDiffs, std::count(str2.begin(), str2LineStart, '\n'));
 				++nbOfDiffs;
 			}
 
-			if (newStr1.empty())
+			if (nbOfDiffs == 0)
+			{
 				newStr1 = "Pas de differences.";
-			if (newStr2.empty())
 				newStr2 = "Pas de differences.";
+			}
 
 			str1 = newStr1;
 			str2 = newStr2;
