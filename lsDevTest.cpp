@@ -44,14 +44,14 @@ void lsDevTest::processTest()
 		{
 			std::string tmpVal = exec_ls(baseDir, args, true)->getVal();
 			removeDevMinorAndFdContent(tmpVal);
-			return mkSpNoPaddingCppStrVal(tmpVal, "", true);
+			return mkSpNoPaddingCppStrVal(tmpVal, "", !dontShowOnlyDiff);
 		};
 	std::function<spNoPaddingCppStrVal(spCppStrVal, spCppStrVal)> testDevFunction =
 		[&](spCppStrVal baseDir, spCppStrVal args)
 		{
 			std::string tmpVal = exec_ls(baseDir, args, false)->getVal();
 			removeDevMinorAndFdContent(tmpVal);
-			return mkSpNoPaddingCppStrVal(tmpVal, "", true);
+			return mkSpNoPaddingCppStrVal(tmpVal, "", !dontShowOnlyDiff);
 		};
 
 	testThisFun(baseDevFunction, testDevFunction, mkSpCppStrVal("dev-tests"), mkSpCppStrVal("/dev"));

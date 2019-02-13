@@ -12,6 +12,8 @@
 #include "noPaddingCppStrVal.hpp"
 #include "funktionsprufer/stdOutputGetter.hpp"
 
+bool lsTest::dontShowOnlyDiff = false;
+
 namespace
 {
 	std::atomic<bool> sig_chld_catched;
@@ -102,7 +104,7 @@ spNoPaddingCppStrVal lsTest::exec_ls(spCppStrVal baseDir, spCppStrVal args, bool
 				{
 					return "UNKNOWN ERROR";
 				}
-			}(), "", true);
+			}(), "", !dontShowOnlyDiff);
 }
 
 lsTest::lsTest()

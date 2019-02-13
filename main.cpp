@@ -19,6 +19,7 @@ LISTE DES COMMANDES:
                           seront testes.
 -r<nom_du_test>           Desactive ce test en mode non-verbeux.
 --erronly                 Affiche uniquement les tests echoues lors du mode verbeux.
+--showall                 Affiche le resultat entier des commandes et pas seulement les diffs.
 --nocolor                 Desactive l'affichage avec des couleurs.
 --help                    Affiche cette page d'aide.)str";
 
@@ -53,6 +54,12 @@ int main(int argc, char **argv)
 	launcher.addOption("--erronly", std::bind(testLauncher::defErrOnlyFun, std::placeholders::_1, std::placeholders::_2));
 	launcher.addOption("--nocolor", std::bind(testLauncher::defNoColorFun, std::placeholders::_1, std::placeholders::_2));
 	launcher.addOption("--help", std::bind(testLauncher::defHelpFun, std::placeholders::_1, std::placeholders::_2));
+	launcher.addOption("--showall", [](testLauncher* launcherTest, std::string param)
+			{
+				(void)launcherTest;
+				(void)param;
+				lsTest::dontShowOnlyDiff = true;
+			});
 	launcher.setNoOptArgFun(std::bind(testLauncher::defNoOptArgFun, std::placeholders::_1, std::placeholders::_2));
 
 	untar_tests_files();

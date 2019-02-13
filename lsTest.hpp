@@ -8,6 +8,8 @@
 class lsTest : public absTest
 {
 public:
+	static bool dontShowOnlyDiff;
+public:
 	lsTest();
 protected:
 	spNoPaddingCppStrVal exec_ls(spCppStrVal baseDir, spCppStrVal args, bool isBinLs);
