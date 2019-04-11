@@ -1,3 +1,5 @@
+#!/bin/bash
+
 getProgFiles="true"
 makeTests="true"
 progPath="../ft_ls"
